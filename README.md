@@ -7,7 +7,7 @@ Script para instalação automatizada de Docker, Traefik e Portainer em VPS Ubun
 Execute o comando abaixo na sua VPS para iniciar a instalação:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/LuizBranco-ClickHype/vpsmcp/main/instalador -o instalador && chmod +x instalador && ./instalador
+curl -fsSL https://raw.githubusercontent.com/LuizBranco-ClickHype/vpsmcp/main/instalador.sh -o instalador.sh && chmod +x instalador.sh && ./instalador.sh
 ```
 
 ## Funcionalidades
@@ -31,17 +31,17 @@ Se preferir, você pode fazer a instalação manual:
 
 1. Baixe o script:
    ```bash
-   curl -fsSL https://raw.githubusercontent.com/LuizBranco-ClickHype/vpsmcp/main/instalador -o instalador
+   curl -fsSL https://raw.githubusercontent.com/LuizBranco-ClickHype/vpsmcp/main/instalador.sh -o instalador.sh
    ```
 
 2. Torne-o executável:
    ```bash
-   chmod +x instalador
+   chmod +x instalador.sh
    ```
 
 3. Execute o script:
    ```bash
-   ./instalador
+   ./instalador.sh
    ```
 
 4. Siga as instruções para informar seu email e domínio
