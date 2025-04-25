@@ -20,12 +20,12 @@ if ! command -v curl &> /dev/null; then
 fi
 
 echo -e "${GREEN}Baixando instalador principal...${NC}"
-curl -fsSL https://raw.githubusercontent.com/LuizBranco-ClickHype/vpsmcp/main/instalador -o instalador
-chmod +x instalador
+curl -fsSL https://raw.githubusercontent.com/LuizBranco-ClickHype/vpsmcp/main/instalador.sh -o instalador.sh
+chmod +x instalador.sh
 
 echo -e "${GREEN}Download concluído!${NC}"
 echo -e "${YELLOW}Iniciando instalador principal...${NC}"
 echo ""
 echo -e "${BLUE}=========================================================${NC}"
 
-./instalador
+./instalador.sh
