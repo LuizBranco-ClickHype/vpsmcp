@@ -88,11 +88,8 @@ services:
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.email=$EMAIL"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/letsencrypt/acme.json"
-      - "--log.level=DEBUG"
+      - "--log.level=INFO"
       - "--log.format=common"
-      - "--log.filePath=/var/log/traefik/traefik.log"
-      - "--accesslog=true"
-      - "--accesslog.filepath=/var/log/traefik/access-log"
     deploy:
       placement:
         constraints:
@@ -176,7 +173,6 @@ services:
         - "traefik.docker.network=network_public"
         - "traefik.http.routers.portainer.rule=Host(\`portainer.$DOMINIO\`)"
         - "traefik.http.routers.portainer.entrypoints=websecure"
-        - "traefik.http.routers.portainer.priority=1"
         - "traefik.http.routers.portainer.tls.certresolver=letsencryptresolver"
         - "traefik.http.routers.portainer.service=portainer"
         - "traefik.http.services.portainer.loadbalancer.server.port=9000"
@@ -184,7 +180,6 @@ services:
 networks:
   network_public:
     external: true
-    attachable: true
     name: network_public
 
 volumes:
@@ -202,7 +197,7 @@ sudo apt install -y nodejs npm
 
 # Instala as dependências globais necessárias
 echo "Instalando dependências do MCP Server..."
-npm install -g @smithery/cli@latest @dev_assistant-ai/github@latest
+npm install -g @smithery/cli@latest
 
 # Criar diretório para o MCP
 mkdir -p ~/mcp-server
@@ -244,8 +239,8 @@ WorkingDirectory=$HOME/mcp-server
 ExecStart=/usr/bin/npx mcp-server --config $HOME/mcp-server/mcpjson
 Restart=on-failure
 RestartSec=10
-StandardOutput=syslog
-StandardError=syslog
+StandardOutput=journal
+StandardError=journal
 SyslogIdentifier=mcp-server
 
 [Install]
@@ -266,7 +261,7 @@ services:
   mcp-server:
     image: node:20-alpine
     working_dir: /app
-    command: sh -c "npm install -g @smithery/cli@latest @dev_assistant-ai/github@latest && npx mcp-server --config /app/mcpjson"
+    command: sh -c "npm install -g @smithery/cli@latest && npx mcp-server --config /app/mcpjson"
     volumes:
       - ./mcpjson:/app/mcpjson
       - /var/run/docker.sock:/var/run/docker.sock
